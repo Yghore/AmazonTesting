@@ -24,7 +24,7 @@ class ProductController extends Controller
         ->get()->first();
         if(!empty($product)){
             $step = (int) $product->step;
-            $nextStep = $step++;
+            $nextStep = $step + 1;
             DB::table('product_users')->update(['step' => $nextStep, 'isValidate' => 0, 'updated_at' => now()]);
             return redirect('home')->with('success', 'Vous avez bien validé votre étape !');
         }

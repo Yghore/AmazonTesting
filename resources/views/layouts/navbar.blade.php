@@ -8,15 +8,15 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             @guest
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{{ route('login') }}">Connexion</a>
+              <a class="nav-link active" aria-current="page" href="{{ route('login') }}">{{ trans('product.navbar.login') }}</a>
             </li>
             @endguest
             @auth
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Vos produits</a>
+              <a class="nav-link active" aria-current="page" href="{{ route('home') }}">{{ trans('product.navbar.product') }}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{{ route('logout') }}">Déconnexion</a>
+              <a class="nav-link active" aria-current="page" href="{{ route('logout') }}">{{ trans('product.navbar.logout') }}</a>
             </li>
             @if (Auth::user()->isAdmin())
             <li class="nav-item">

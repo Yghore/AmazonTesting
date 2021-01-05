@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 
-@section('title', 'Amazon Testing | Login')
+@section('title', trans('product.app_name') . ' | ' . trans('product.title.header.product'))
     
 
 @section('content')
 
 
 @if (!empty($product))
-<h1>Produits - {{ $product->name }}</h1>
+<h1>{{ trans('product.title.page.product', ['name' => $product->name]) }}</h1>
 
 <div class="row">
     <p><strong>Description : </strong>{{ $product->desc_product }}</p>

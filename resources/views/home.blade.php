@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 
-@section('title', 'Amazon Testing | Login')
+@section('title', trans('product.app_name') . ' | ' . trans('product.title.header.home'))
 	
 
 @section('content')
 
-<h1>Acceuil - Vos produits</h1>
+<h1>{{ trans('product.title.page.home') }}</h1>
 @if($errors->any())
 <div class="alert alert-danger" role="alert">{{$errors->first()}}</div>
 @endif
@@ -18,36 +18,36 @@
 		  @if ($product->isValidate)
 		  @switch($product->step)
 		  @case(0)
-				<h6 class="card-subtitle mb-2" style="color:  rgb(241, 105, 105);">Non commandé</h6>
-				<p class="card-text">Merci d'acheter le produit</p>
-				<a href="{{ route('change_step', $product->id) }}" role="button"  class="btn btn-warning">Confirmé l'achat</a>
+				<h6 class="card-subtitle mb-2" style="color:  rgb(241, 105, 105);">{{ trans('product.card.title.not_commanded') }}</h6>
+				<p class="card-text">{{ trans('product.card.desc.not_commanded') }}</p>
+				<a href="{{ route('change_step', $product->id) }}" role="button"  class="btn btn-warning">{{ trans('product.card.button.commanded') }}</a>
 			  @break
 		  @case(1)
-			  <h6 class="card-subtitle mb-2" style="color:   rgb(255, 169, 31);">Non reçu</h6>
-			  <p class="card-text">Avez vous reçu votre commande ?</p>
-			  <a href="{{ route('change_step', $product->id) }}" role="button" class="btn btn-warning">J'ai bien reçu la commande</a>
+			  <h6 class="card-subtitle mb-2" style="color:   rgb(255, 169, 31);">{{ trans('product.card.title.not_received') }}</h6>
+			  <p class="card-text">{{ trans('product.card.desc.not_received') }}</p>
+			  <a href="{{ route('change_step', $product->id) }}" role="button" class="btn btn-warning">{{ trans('product.card.button.received') }}</a>
 			  @break
 		  @case(2)
-			  <h6 class="card-subtitle mb-2" style="color:   rgb(255, 169, 31);">Non noté</h6>
-			  <p class="card-text">Merci de noter le produit en suivant les conditions</p>
-			  <a href="{{ route('change_step', $product->id) }}" role="button" class="btn btn-danger">J'ai bien noté</a>
+			  <h6 class="card-subtitle mb-2" style="color:   rgb(255, 169, 31);">{{ trans('product.card.title.not_noted') }}</h6>
+			  <p class="card-text">{{ trans('product.card.desc.not_noted') }}</p>
+			  <a href="{{ route('change_step', $product->id) }}" role="button" class="btn btn-danger">{{ trans('product.card.button.noted') }}</a>
 			  @break
 		 @case(3)
-			 <h6 class="card-subtitle mb-2" style="color: rgb(137, 241, 105);">Validé</h6>
-			 <p class="card-text">Vous avez bien effectué toutes les étapes !</p>
-			 <a href="{{ route('change_step', $product->id) }}" role="button" class="btn btn-success">Archiver le produit</a>
+			 <h6 class="card-subtitle mb-2" style="color: rgb(137, 241, 105);">{{ trans('product.card.title.valided') }}</h6>
+			 <p class="card-text">{{ trans('product.card.desc.valided') }}</p>
+			 <a href="{{ route('change_step', $product->id) }}" role="button" class="btn btn-success disabled">{{ trans('product.card.button.archived') }}</a>
 			  @break
 		 @case(4)
-			  <h6 class="card-subtitle mb-2"  style="color:rgb(241, 105, 105);">Refusé</h6>
-			  <p class="card-text">Vous n'avez pas bien suivi la procédures ! vous allez être contacté d'ici peu</p>
+			  <h6 class="card-subtitle mb-2"  style="color:rgb(241, 105, 105);">{{ trans('product.card.title.refused') }}</h6>
+			  <p class="card-text">{{ trans('product.card.desc.refused') }}</p>
 			   @break
 		  @default
-		  <h6 class="card-subtitle mb-2" style="color:rgb(241, 105, 105);">Erreur</h6>
-		  <p class="card-text">Une erreur est survenue, merci de contacter un Administrateur</p>
+		  <h6 class="card-subtitle mb-2" style="color:rgb(241, 105, 105);">{{ trans('product.card.title.error') }}</h6>
+		  <p class="card-text">{{ trans('product.card.desc.error') }}</p>
 	  @endswitch
 		  @else
-			<h6 class="card-subtitle mb-2" style="color:   rgb(255, 169, 31);">En cours de validation</h6>
-			<p class="card-text">Vérification de l'étape...</p>
+			<h6 class="card-subtitle mb-2" style="color:   rgb(255, 169, 31);">{{ trans('product.card.title.waiting') }}</h6>
+			<p class="card-text">{{ trans('product.card.desc.waiting') }}</p>
 			@endif
 		  
 		  <a href="{{ route('product', $product->id) }}" role="button" class="btn btn-primary" style="margin-top: 3px;">Voir la fiche produit</a>
