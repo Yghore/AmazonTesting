@@ -16,7 +16,7 @@
     <h3><strong>Mots clé : </strong>{{ $product->keywords }}</h3>
     <h3><strong>Référence : </strong>{{ $product->reference }}</h3>
     <h3><strong>Image : </strong></h3>
-    <div class="col"><img src="{{ $product->img }}" alt="Image du produit"></div>
+    <div class="col"><img style="max-width: 300px; max-heigth: auto;" src="{{ asset('storage/' . $product->img) }}" alt="Image du produit"></div>
 </div>
 
 
@@ -26,7 +26,7 @@
     <h4 class="alert-heading">Une erreur est survenue</h4>
     <p>Ce produit n'existe pas, si le problème persiste. Merci de contacter un Administrateur.</p>
     <hr>
-    <p class="mb-0">Revenir en <a href="{{ route('home') }}">l'accueil</a></p>
+    <p class="mb-0">Revenir à <a href="{{ route('home') }}">l'accueil</a></p>
   </div>
 
 @endif

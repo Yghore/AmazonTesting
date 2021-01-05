@@ -18,6 +18,7 @@ class CreateProductUsersTable extends Migration
             $table->integer('user_id');
             $table->integer('product_id');
             $table->integer('step');
+            $table->boolean('isValidate')->default(1);
             $table->timestamps();
         });
     }

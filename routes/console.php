@@ -22,9 +22,9 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 Artisan::command('create_user', function () {
-    $name = $this->ask('Username :');
-    $email = $this->ask('Email :');
-    $password = $this->ask('Password :');
+    $name = $this->ask('Username');
+    $email = $this->ask('Email');
+    $password = $this->ask('Password');
     $user = User::create([
         'name' => $name,
         'email' => $email,

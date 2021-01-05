@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Product_users extends Model
 {
     use HasFactory;
+
+    protected $dateFormat = 'dd/mm - HH:ii';
 }

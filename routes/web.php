@@ -25,6 +25,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('product/{id}', 'ProductController@index')->name('product');
 
+    Route::get('user/product/step/{product}', 'ProductController@ChangeStep')->name('change_step');
+
 });
 
 Route::group(['middleware' => ['admin']], function () {
@@ -37,6 +39,8 @@ Route::group(['middleware' => ['admin']], function () {
         Route::get('/', 'AdminController@index')->name('admin');
         Route::post('/product/add', 'AdminController@addProduct')->name('admin_product_add');
         Route::post('/user/add/product', 'AdminController@addProductForUser')->name('admin_add_product_user');
+        Route::get('/step/validate/{productuser}', 'AdminController@validateStep')->name('admin_validate_step');
+        Route::get('/step/error/{productuser}', 'AdminController@errorStep')->name('admin_error_step');
         Route::post('/add/image', 'ImageController@addImage')->name('admin_add_image');
         Route::get('/img/list', 'ImageController@listImages');
 

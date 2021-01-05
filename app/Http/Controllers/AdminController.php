@@ -14,10 +14,16 @@ class AdminController extends Controller
         $img_list = ImageController::arrayImages();
         $users_list = DB::table('users')->get()->toArray();
         $products_list = DB::table('products')->where('isHidden', '=', 0)->get()->toArray();
+        $validate_list = DB::table('product_users')
+        ->join('users', 'product_users.user_id', '=', 'users.id')
+        ->join('products', 'product_users.product_id', '=', 'products.id')
+        ->select(['users.name as username', 'products.name as productname', 'product_users.id', 'products.img', 'step', 'product_users.updated_at'])
+        ->where('isValidate', '=', 0)->get()->toArray();
         return view('admin.index')
         ->with('img_list', $img_list)
         ->with('users_list', $users_list)
-        ->with('products_list', $products_list);
+        ->with('products_list', $products_list)
+        ->with('validate_list', $validate_list);
     }
 
 
@@ -90,6 +96,24 @@ class AdminController extends Controller
         ];
         return redirect('admin')->with($with);
         
+    }
+
+    public function validateStep(int $productuser)
+    {
+        DB::table('product_users')->where('id', '=', $productuser)->update(['isValidate' => 1]);
+        $with = [
+            'success' => 'Vous avez bien validé l\'étape',
+        ];
+        return redirect('admin')->with($with);
+    }
+
+    public function errorStep(int $productuser)
+    {
+        DB::table('product_users')->where('id', '=', $productuser)->update(['isValidate' => 1, 'step' => 4]);
+        $with = [
+            'success' => 'l\'étape à bien été erronée',
+        ];
+        return redirect('admin')->with($with);
     }
 
 }
