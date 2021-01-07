@@ -1,6 +1,6 @@
 # HydraProdTest
 ## By Yghore#3309
- Web service for manage a product test with amazon
+ Web service for manage a product test
 
 ## Configuration 
 
