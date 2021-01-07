@@ -18,15 +18,17 @@ class ProductController extends Controller
     public function ChangeStep(Request $request, $product)
     {
         $id = Auth::user()->id;
-        $product = DB::table('product_users')->select()
-        ->where('product_id', '=', $product)
+        $product_db = DB::table('product_users')->select()
+        ->where('id', '=', $product)
         ->where('user_id', '=', $id)
         ->where('isValidate', '=', 1)
         ->get()->first();
-        if(!empty($product)){
-            $step = (int) $product->step;
+        if(!empty($product_db)){
+            $step = (int) $product_db->step;
             $nextStep = $step + 1;
-            DB::table('product_users')->update(['step' => $nextStep, 'isValidate' => 0, 'updated_at' => now()]);
+            DB::table('product_users')
+            ->where('id', '=', $product)
+            ->update(['step' => $nextStep, 'isValidate' => 0, 'updated_at' => now()]);
             return redirect('home')->with('success', 'Vous avez bien validé votre étape !');
         }
         return redirect('home')->withErrors(['Product_not_for_users' => 'Vous n\'avez pas la permission !']);
@@ -52,14 +54,16 @@ class ProductController extends Controller
         $prod_id = $request->input('product');
         $information = 'N de commande : \''. $request->input('information') .'\'';
         $product = DB::table('product_users')->select()
-        ->where('product_id', '=', $prod_id)
+        ->where('id', '=', $prod_id)
         ->where('user_id', '=', $id)
         ->where('isValidate', '=', 1)
         ->get()->first();
         if(!empty($product)){
             $step = (int) $product->step;
             $nextStep = $step + 1;
-            DB::table('product_users')->update(['step' => $nextStep, 'information' => $information, 'isValidate' => 0, 'updated_at' => now()]);
+            DB::table('product_users')
+            ->where('id', '=', $prod_id)
+            ->update(['step' => $nextStep, 'information' => $information, 'isValidate' => 0, 'updated_at' => now()]);
             return redirect('home')->with('success', 'Vous avez bien validé votre étape !');
         }
         return redirect('home')->withErrors(['Product_not_for_users' => 'Vous n\'avez pas la permission !']);  
@@ -68,7 +72,9 @@ class ProductController extends Controller
     public static function getProductForUser(int $id_user)
     {
         $products = DB::table('product_users')
-        ->join('products', 'product_users.product_id', '=', 'products.id')->where('user_id', '=', $id_user)->get()->toArray();
+        ->join('products', 'product_users.product_id', '=', 'products.id')->where('user_id', '=', $id_user)
+        ->select(['product_id', 'user_id', 'step', 'updated_at', 'name', 'isHidden', 'img', 'isValidate', 'product_users.id'])
+        ->get()->toArray();
         return $products;
     }
 }

@@ -87,8 +87,7 @@ class RegisterController extends Controller
         if(!$validate->fails())
         {
             $user = $this->create($data);
-            dd($user);
-            return redirect('home');
+            return redirect('admin')->with(['success' => 'Vous avez bien crée l\'utilisateur']);
         }
     }
 

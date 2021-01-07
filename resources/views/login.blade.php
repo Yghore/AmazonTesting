@@ -14,8 +14,8 @@
     <form method="POST" action="{{ route('login_post') }}">
         @csrf
         <div class="mb-3">
-        <label for="email" class="form-label">Adresse email : </label>
-        <input type="email" class="form-control" id="email" name="email" placeholder="john.doe@example.com" aria-describedby="emailHelp">
+        <label for="email" class="form-label">Adresse email/Pseudonyme : </label>
+        <input type="text" class="form-control" id="email" name="email" placeholder="john.doe@example.com/john.doe" aria-describedby="emailHelp">
         <div id="email" class="form-text">J'aime l'argent</div>
         </div>
         <div class="mb-3">

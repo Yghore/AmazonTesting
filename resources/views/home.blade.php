@@ -74,7 +74,7 @@
 			<p class="card-text">{{ trans('product.card.desc.waiting') }}</p>
 			@endif
 		  
-		  <a href="{{ route('product', $product->id) }}" role="button" class="btn btn-primary" style="margin-top: 3px;">Voir la fiche produit</a>
+		  <a href="{{ route('product', $product->product_id) }}" role="button" class="btn btn-primary" style="margin-top: 3px;">Voir la fiche produit</a>
 		  <p class="card-text"><small class="text-muted">Dernière modification : {{ $product->updated_at }}</small></p>
 		</div>
 	</div>       
