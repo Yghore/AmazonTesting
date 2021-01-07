@@ -17,7 +17,7 @@ class AdminController extends Controller
         $validate_list = DB::table('product_users')
         ->join('users', 'product_users.user_id', '=', 'users.id')
         ->join('products', 'product_users.product_id', '=', 'products.id')
-        ->select(['users.name as username', 'products.name as productname', 'product_users.id', 'products.img', 'step', 'product_users.updated_at'])
+        ->select(['users.name as username', 'products.name as productname', 'product_users.id', 'products.img', 'step', 'product_users.updated_at', 'information'])
         ->where('isValidate', '=', 0)->get()->toArray();
         return view('admin.index')
         ->with('img_list', $img_list)

@@ -41,7 +41,7 @@
             </div>
             <label for="price" class="form-label"><strong>Prix :</strong></label>
             <div class="mb-3 input-group">
-                <input type="number" class="form-control" name="price" id="price" aria-describedby="price" placeholder="19,99">
+                <input type="number" step="0.01" min="0.01" max="800" class="form-control" name="price" id="price" aria-describedby="price" placeholder="19,99">
                 <span class="input-group-text"><strong>€</strong></span>
             </div>
             <div class="mb-3">
@@ -198,6 +198,7 @@
               <th scope="col">Etape</th>
               <th scope="col">Image</th>
               <th scope="col">Dernière modification</th>
+              <th scope="col">Information</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
@@ -225,8 +226,9 @@
                 @default
                 <td class="card-subtitle mb-2" style="color:rgb(241, 105, 105);">Erreur</td>
               @endswitch
-              <td><img style="width: 150px; max-height: auto;" src="{{ asset('storage/'. $img) }}" alt="{{ $img }}"></td>
+              <td><img style="width: 150px; max-height: auto;" src="{{ asset('storage/'. $validate->img) }}" alt="{{ $validate->img }}"></td>
               <td>{{ $validate->updated_at }}</td>
+              <td>{{ $validate->information }}</td>
               <td> <a href="{{ route('admin_validate_step', $validate->id) }}" role="button" class="btn btn-success" style="margin-top: 3px;">Valider</a>
               <a href="{{ route('admin_error_step', $validate->id) }}" role="button" class="btn btn-danger" style="margin-top: 3px;">Erreur</a></td>
               </tr>

@@ -20,8 +20,32 @@
 		  @case(0)
 				<h6 class="card-subtitle mb-2" style="color:  rgb(241, 105, 105);">{{ trans('product.card.title.not_commanded') }}</h6>
 				<p class="card-text">{{ trans('product.card.desc.not_commanded') }}</p>
-				<a href="{{ route('change_step', $product->id) }}" role="button"  class="btn btn-warning">{{ trans('product.card.button.commanded') }}</a>
-			  @break
+				<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#commanded_validation">{{ trans('product.card.button.commanded') }}</button>
+			  	  <!-- Modal -->
+  <div class="modal fade" id="commanded_validation" tabindex="-1" aria-labelledby="commanded_validation" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="commanded_validation">{{ trans('product.card.title.not_commanded') }}</h5>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+		  Merci d'indiquer le numéro de commande : 
+		  <form action="{{ route('change_steppost') }}" method="POST">
+			@csrf
+			<input type="hidden" name="product" value="{{ $product->id }}">
+			<input type="text" class="form-control" name="information" id="information" aria-describedby="information" placeholder="404-96854-4857483">
+
+		</div>
+		<div class="modal-footer">
+		  <input type="submit" role="button"  class="btn btn-warning" value="{{ trans('product.card.button.commanded') }}" />
+		</div>
+		</form>
+	  </div>
+	</div>
+  </div>
+  
+				@break
 		  @case(1)
 			  <h6 class="card-subtitle mb-2" style="color:   rgb(255, 169, 31);">{{ trans('product.card.title.not_received') }}</h6>
 			  <p class="card-text">{{ trans('product.card.desc.not_received') }}</p>
@@ -67,6 +91,7 @@
 
 </div>
 
+  
 
 
 @endsection

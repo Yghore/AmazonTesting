@@ -26,6 +26,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('product/{id}', 'ProductController@index')->name('product');
 
     Route::get('user/product/step/{product}', 'ProductController@ChangeStep')->name('change_step');
+    Route::post('user/product/post/step/', 'ProductController@ChangeStepPost')->name('change_steppost');
+
 
 });
 
