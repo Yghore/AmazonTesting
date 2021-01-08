@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NewCommands;
 
 
 class AdminController extends Controller
@@ -90,7 +92,9 @@ class AdminController extends Controller
             'updated_at' => now()
         ];
         $validate = $this->validatorProductForUsers($data);
+        $user = DB::table('users')->select(['email'])->where('id', '=', $request->input('user'))->first();
         DB::table('product_users')->insert($data);
+        Mail::to($user->email)->send(new NewCommands());
         $with = [
             'success' => 'Le produit à bien été ajouté pour l\'utilisateur !',
         ];
