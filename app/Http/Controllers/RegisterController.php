@@ -53,14 +53,14 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
         ],
         [
             'name' => 'Votre pseudonyme n\'est pas valide',
             'email' => 'Votre email n\'est pas valide',
             'password' => 'Votre mot de passe n\'est pas valide',
         ]
-        );
+        )->validate();
     }
 
 
@@ -84,11 +84,8 @@ class RegisterController extends Controller
     {
         $data = $request->all();
         $validate = $this->validator($data);
-        if(!$validate->fails())
-        {
-            $user = $this->create($data);
-            return redirect('admin')->with(['success' => 'Vous avez bien crée l\'utilisateur']);
-        }
+        $user = $this->create($data);
+        return redirect(route('users_list'))->with(['success' => 'Vous avez bien crée l\'utilisateur']);
     }
 
 }

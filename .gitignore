@@ -5,6 +5,7 @@
 /public/storage
 /storage/*.key
 /vendor
+/ressouces/lang/fr_FR/*
 .env
 .env.backup
 .phpunit.result.cache

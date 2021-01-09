@@ -29,6 +29,66 @@ class AdminController extends Controller
     }
 
 
+    public function users_list()
+    {
+        $users_list = DB::table('users')->get()->toArray();
+        return view('admin.users_list')->with('users_list', $users_list);
+    }
+
+    public function user_add()
+    {
+        return view('admin.add_user');
+    }
+
+    public function user_add_product()
+    {   
+        $products_list = DB::table('products')->where('isHidden', '=', 0)->get()->toArray();
+        $users_list = DB::table('users')->get()->toArray();
+        return view('admin.add_product_for_user')
+        ->with('users_list', $users_list)
+        ->with('products_list', $products_list);
+    }
+
+    public function product_add()
+    {
+        $img_list = ImageController::arrayImages();
+        return view('admin.add_product')
+        ->with('img_list', $img_list);
+    }
+
+    public function products_list()
+    {
+        $products_list = DB::table('products')->where('isHidden', '=', 0)->get()->toArray();
+        return view('admin.products_list')
+        ->with('products_list', $products_list);
+    }
+
+    public function images_list()
+    {
+        $img_list = ImageController::arrayImages();
+        return view('admin.images_list')
+        ->with('img_list', $img_list);
+    }
+
+    public function image_add()
+    {
+        return view('admin.add_image');
+    }
+
+    public function waiting_list()
+    {
+
+        $validate_list = DB::table('product_users')
+        ->join('users', 'product_users.user_id', '=', 'users.id')
+        ->join('products', 'product_users.product_id', '=', 'products.id')
+        ->select(['users.name as username', 'products.name as productname', 'product_users.id', 'products.img', 'step', 'product_users.updated_at', 'information'])
+        ->where('isValidate', '=', 0)->get()->toArray();
+        return view('admin.waiting_list')
+        ->with('validate_list', $validate_list);
+    }
+
+
+
     protected function validatorProduct(array $data)
     {
         $rules = 
@@ -77,7 +137,7 @@ class AdminController extends Controller
         $with = [
             'success' => 'Le produit à bien été ajouté !',
         ];
-        return redirect('admin')->with($with);
+        return redirect(route('products_list'))->with($with);
         
     }
 
@@ -98,7 +158,7 @@ class AdminController extends Controller
         $with = [
             'success' => 'Le produit à bien été ajouté pour l\'utilisateur !',
         ];
-        return redirect('admin')->with($with);
+        return redirect(route('waiting_list'))->with($with);
         
     }
 
@@ -108,7 +168,7 @@ class AdminController extends Controller
         $with = [
             'success' => 'Vous avez bien validé l\'étape',
         ];
-        return redirect('admin')->with($with);
+        return redirect(route('waiting_list'))->with($with);
     }
 
     public function errorStep(int $productuser)
@@ -117,7 +177,7 @@ class AdminController extends Controller
         $with = [
             'success' => 'l\'étape à bien été erronée',
         ];
-        return redirect('admin')->with($with);
+        return redirect(route('waiting_list'))->with($with);
     }
 
 }

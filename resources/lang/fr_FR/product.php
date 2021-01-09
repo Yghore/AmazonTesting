@@ -31,31 +31,31 @@ return [
             'not_commanded' => 'Non commandé',
             'not_received' => 'Non reçu',
             'not_noted' => 'Non noté',
-            'valided' => 'Validé !',
-            'refused' => 'Refusé !',
+            'valided' => 'Commande terminée !',
+            'refused' => 'Commande refusée !',
             'error' => 'Erreur !',
-            'waiting' => 'En cours de validation !',
+            'waiting' => 'Étape en cours de validation !',
         ],
         'desc' =>
         [
             'not_commanded' => 'Merci d\'acheter le produit',
             'not_received' => 'Avez vous reçu votre commande ?',
-            'not_noted' => 'Merci de noter le produit en suivant les conditions',
+            'not_noted' => 'Veuillez mettre votre commantaire en suivant les conditions suivantes : Mettre 5 étoiles et ne pas critiquer le produit.',
             'valided' => 'Vous avez bien effectué toutes les étapes !',
             'refused' => 'Vous n\'avez pas bien suivi la procédures ! vous allez être contacté d\'ici peu',
-            'error' => 'Une erreur est survenue, merci de contacter un Administrateur',
-            'waiting' => 'Vérification de l\'étape...',
+            'error' => 'Une erreur est survenue, merci de contacter votre Responsable',
+            'waiting' => 'Vérification en cours de l\'étape...',
         ],
         'button' =>
         [
-            'commanded' => 'Confirmé l\'achat',
+            'commanded' => 'Confirmer l\'achat',
             'received' => 'J\'ai bien reçu la commande',
-            'noted' => 'J\'ai bien noté',
-            'archived' => 'Archiver le produit',
+            'noted' => 'Commentaire ajouté',
+            'archived' => 'Archiver',
             'refused' => 'Refusé !',
             'error' => 'Erreur !',
             'waiting' => 'En cours de validation !',
-            'archived' => 'Archiver le produit',
+            'archived' => 'Archiver',
         ]
     ]
 ];
