@@ -16,15 +16,15 @@
               <a class="nav-link active" aria-current="page" href="{{ route('home') }}">{{ trans('product.navbar.product') }}</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{{ route('profile') }}">Profil</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="{{ route('logout') }}">{{ trans('product.navbar.logout') }}</a>
             </li>
             @if (Auth::user()->isAdmin())
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="{{ route('admin') }}">Administration</a>
-            </li>        
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{{ route('register') }}">Inscription</a>
-            </li>            
+            </li>                  
             @endif
             @endauth
         </ul>

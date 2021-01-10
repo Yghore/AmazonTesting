@@ -15,6 +15,7 @@
             padding-bottom: 70px;
         }
     </style>
+    @stack('head')
 </head>
 <body>
     @include('layouts.navbar')

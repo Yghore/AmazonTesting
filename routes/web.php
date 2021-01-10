@@ -27,6 +27,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('user/product/step/{product}', 'ProductController@ChangeStep')->name('change_step');
     Route::post('user/product/post/step/', 'ProductController@ChangeStepPost')->name('change_steppost');
+    Route::get('profile/', 'UserController@index')->name('profile');
+    Route::post('profile/reset/password', 'UserController@changePassword')->name('change_password');
 
 
 });
