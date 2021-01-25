@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ErrorCommand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NewCommands;
-
+use App\Mail\ReceivedCommand;
+use App\Mail\ValidCommand;
 
 class AdminController extends Controller
 {
@@ -165,6 +167,17 @@ class AdminController extends Controller
     public function validateStep(int $productuser)
     {
         DB::table('product_users')->where('id', '=', $productuser)->update(['isValidate' => 1]);
+        $step = DB::table('product_users')->where('product_users.id', '=', $productuser)
+        ->join('users', 'product_users.user_id', '=', 'users.id')
+        ->select(['step', 'users.email'])->first();
+        switch ($step->step) {
+            case 1:
+                Mail::to($step->email)->send(new ValidCommand());
+                break;
+            case 2:
+                Mail::to($step->email)->send(new ReceivedCommand());
+                break;
+        }
         $with = [
             'success' => 'Vous avez bien validé l\'étape',
         ];
@@ -174,9 +187,14 @@ class AdminController extends Controller
     public function errorStep(int $productuser)
     {
         DB::table('product_users')->where('id', '=', $productuser)->update(['isValidate' => 1, 'step' => 4]);
+        $step = DB::table('product_users')->where('product_users.id', '=', $productuser)
+        ->join('users', 'product_users.user_id', '=', 'users.id')
+        ->select(['step', 'users.email'])->first();
         $with = [
             'success' => 'l\'étape à bien été erronée',
         ];
+        
+        Mail::to($step->email)->send(new ErrorCommand());
         return redirect(route('waiting_list'))->with($with);
     }
 

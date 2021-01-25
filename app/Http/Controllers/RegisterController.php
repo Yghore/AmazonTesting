@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NewRegister;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -85,6 +87,7 @@ class RegisterController extends Controller
         $data = $request->all();
         $validate = $this->validator($data);
         $user = $this->create($data);
+        Mail::to($request->input('email'))->send(new NewRegister());
         return redirect(route('users_list'))->with(['success' => 'Vous avez bien crée l\'utilisateur']);
     }
 
