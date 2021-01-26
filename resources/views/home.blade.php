@@ -54,7 +54,7 @@
 		  @case(2)
 			  <h6 class="card-subtitle mb-2" style="color:   rgb(255, 169, 31);">{{ trans('product.card.title.not_noted') }}</h6>
 			  <p class="card-text">{{ trans('product.card.desc.not_noted') }}</p>
-			  <p>Merci d'attente pour envoyer votre commentaire</p>
+			  <p>Merci d'attendre pour envoyer votre commentaire</p>
 			  {{-- <a href="{{ route('change_step', $product->id) }}" role="button" class="btn btn-danger">{{ trans('product.card.button.noted') }}</a> --}}
 			  @break
 		@case(3)
