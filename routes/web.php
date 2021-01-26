@@ -49,12 +49,13 @@ Route::group(['middleware' => ['admin']], function () {
         Route::get('/images/add', 'AdminController@image_add')->name('image_add');
         Route::get('/images/list', 'AdminController@images_list')->name('images_list');
         Route::get('/manager/waiting', 'AdminController@waiting_list')->name('waiting_list');
-        Route::get('/manager/product', 'AdminController@index')->name('manager_product');
+        Route::get('/manager/product', 'AdminController@manager_product')->name('manager_product');
 
         Route::post('/product/add', 'AdminController@addProduct')->name('admin_product_add');
         Route::post('/user/add/product', 'AdminController@addProductForUser')->name('admin_add_product_user');
         Route::get('/step/validate/{productuser}', 'AdminController@validateStep')->name('admin_validate_step');
         Route::get('/step/error/{productuser}', 'AdminController@errorStep')->name('admin_error_step');
+        Route::get('/productuser/remove/{id}', 'AdminController@deleteProductUser')->name('admin_delete_productuser');
         Route::post('/add/image', 'ImageController@addImage')->name('admin_add_image');
         Route::get('/img/list', 'ImageController@listImages');
 

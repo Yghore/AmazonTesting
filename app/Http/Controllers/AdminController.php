@@ -89,6 +89,24 @@ class AdminController extends Controller
         ->with('validate_list', $validate_list);
     }
 
+    public function manager_product()
+    {
+        $product = DB::table('product_users')
+        ->join('users', 'product_users.user_id', '=', 'users.id')
+        ->join('products', 'product_users.product_id', '=', 'products.id')
+        ->select(['users.name as username', 'products.name as productname', 'product_users.id', 'products.img', 'step', 'product_users.updated_at', 'information'])
+        ->get()->toArray();
+        return view('admin.manager_product')
+        ->with('products', $product);
+    }
+
+    public function deleteProductUser(int $id)
+    {
+
+        DB::table('product_users')->delete($id);
+        return redirect(route('manager_product'))->with(['success' => 'Suprresion du produit pour l\'utilisateur effectué !']);
+    }
+
 
 
     protected function validatorProduct(array $data)

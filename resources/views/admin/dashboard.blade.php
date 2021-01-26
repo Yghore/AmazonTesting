@@ -133,7 +133,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="{{ route('manager_product') }}">
                 <i class="fas fa-sync-alt"></i>
                 Produit en cours
               </a>
