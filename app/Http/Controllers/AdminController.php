@@ -83,8 +83,8 @@ class AdminController extends Controller
         $validate_list = DB::table('product_users')
         ->join('users', 'product_users.user_id', '=', 'users.id')
         ->join('products', 'product_users.product_id', '=', 'products.id')
-        ->select(['users.name as username', 'products.name as productname', 'product_users.id', 'products.img', 'step', 'product_users.updated_at', 'information'])
-        ->where('isValidate', '=', 0)->get()->toArray();
+        ->select(['users.name as username', 'products.name as productname', 'product_users.id', 'products.img', 'step', 'product_users.isValidate', 'product_users.updated_at', 'information'])
+        ->where('isValidate', '=', 0)->orWhere('step', '=', 2)->get()->toArray();
         return view('admin.waiting_list')
         ->with('validate_list', $validate_list);
     }
@@ -184,10 +184,17 @@ class AdminController extends Controller
 
     public function validateStep(int $productuser)
     {
-        DB::table('product_users')->where('id', '=', $productuser)->update(['isValidate' => 1]);
+        
         $step = DB::table('product_users')->where('product_users.id', '=', $productuser)
         ->join('users', 'product_users.user_id', '=', 'users.id')
-        ->select(['step', 'users.email'])->first();
+        ->select(['step', 'users.email', 'isValidate'])->first();
+        if($step->step == 2 && $step->isValidate == 1){
+            DB::table('product_users')->where('id', '=', $productuser)->update(['step' => 3]);
+        }
+        else 
+        {
+            DB::table('product_users')->where('id', '=', $productuser)->update(['isValidate' => 1]);
+        }
         switch ($step->step) {
             case 1:
                 Mail::to($step->email)->send(new ValidCommand());

@@ -32,12 +32,20 @@
             <td class="card-subtitle mb-2" style="color:   rgb(255, 169, 31);">Non reçu</td>
             @break
           @case(2)
-            <td class="card-subtitle mb-2" style="color:   rgb(255, 169, 31);">Non noté</td>
+            @if ($validate->isValidate == 0)
+              <td class="card-subtitle mb-2" style="color:    rgb(137, 241, 105);">Confirmer la reçu</td>
+            @else
+              <td class="card-subtitle mb-2" style="color:    rgb(137, 241, 105);">En attente de la demande de l'avis</td>
+            @endif
+           
             @break
          @case(3)
-           <td class="card-subtitle mb-2" style="color: rgb(137, 241, 105);">Validé</td>
+           <td class="card-subtitle mb-2" style="color: rgb(255, 169, 31);">Non noté</td>
             @break
-         @case(4)
+          @case(4)
+            <td class="card-subtitle mb-2" style="color: rgb(137, 241, 105);">Validé</td>
+             @break
+         @case(5)
             <td class="card-subtitle mb-2"  style="color:rgb(241, 105, 105);">Refusé</td>
              @break
           @default
@@ -66,3 +74,4 @@
 
 
 @endsection
+

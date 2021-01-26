@@ -18,6 +18,7 @@ class ProductController extends Controller
     public function ChangeStep(Request $request, $product)
     {
         $id = Auth::user()->id;
+        
         $product_db = DB::table('product_users')->select()
         ->where('id', '=', $product)
         ->where('user_id', '=', $id)
@@ -26,9 +27,13 @@ class ProductController extends Controller
         if(!empty($product_db)){
             $step = (int) $product_db->step;
             $nextStep = $step + 1;
+            $visibility = 0;
+            if($nextStep == 3){
+                $visibility = 1;
+            }
             DB::table('product_users')
             ->where('id', '=', $product)
-            ->update(['step' => $nextStep, 'isValidate' => 0, 'updated_at' => now()]);
+            ->update(['step' => $nextStep, 'isValidate' => $visibility, 'updated_at' => now()]);
             return redirect('home')->with('success', 'Vous avez bien validé votre étape !');
         }
         return redirect('home')->withErrors(['Product_not_for_users' => 'Vous n\'avez pas la permission !']);
