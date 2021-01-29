@@ -18,7 +18,7 @@ class ReceivedCommand extends Mailable
      */
     public function __construct()
     {
-        //
+        $this->subject('[Amazon Testing] Réception de votre produit validée');
     }
 
     /**

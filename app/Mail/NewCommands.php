@@ -18,7 +18,7 @@ class NewCommands extends Mailable
      */
     public function __construct()
     {
-        //
+        $this->subject('[Amazon Testing] Vous avez une nouvelle commande');
     }
 
     /**

@@ -18,7 +18,7 @@ class ValidCommand extends Mailable
      */
     public function __construct()
     {
-        //
+        $this->subject('[Amazon Testing] Votre commande à été validé !');
     }
 
     /**

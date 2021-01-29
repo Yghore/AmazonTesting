@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NewCommands;
+use App\Mail\NotedCommand;
 use App\Mail\ReceivedCommand;
 use App\Mail\ValidCommand;
 
@@ -199,8 +200,14 @@ class AdminController extends Controller
             case 1:
                 Mail::to($step->email)->send(new ValidCommand());
                 break;
-            case 2:
-                Mail::to($step->email)->send(new ReceivedCommand());
+            case 2: 
+                if($step->isValidate == 0){
+                    Mail::to($step->email)->send(new ReceivedCommand());
+                }
+                else 
+                {
+                    Mail::to($step->email)->send(new NotedCommand());
+                }
                 break;
         }
         $with = [

@@ -18,7 +18,7 @@ class ErrorCommand extends Mailable
      */
     public function __construct()
     {
-        //
+        $this->subject('[Amazon Testing] Erreur dans votre commande');
     }
 
     /**

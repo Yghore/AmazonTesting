@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ConfirmedReceivedCommand extends Mailable
+class NotedCommand extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -18,7 +18,7 @@ class ConfirmedReceivedCommand extends Mailable
      */
     public function __construct()
     {
-        //
+        $this->subject('[Amazon Testing] Notation de votre produit');
     }
 
     /**
@@ -28,6 +28,6 @@ class ConfirmedReceivedCommand extends Mailable
      */
     public function build()
     {
-        return $this->view('email.step.2_valid');
+        return $this->view('email.step.3_valid');
     }
 }
