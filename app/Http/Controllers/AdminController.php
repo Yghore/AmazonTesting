@@ -78,14 +78,33 @@ class AdminController extends Controller
         return view('admin.add_image');
     }
 
-    public function waiting_list()
+    public function waiting_list($orderBy = "ALL")
     {
+        if($orderBy === "ALL"){
+            $validate_list = DB::table('product_users')
+            ->join('users', 'product_users.user_id', '=', 'users.id')
+            ->join('products', 'product_users.product_id', '=', 'products.id')
+            ->select(['users.name as username', 'products.name as productname', 'product_users.id', 'products.img', 'step', 'product_users.isValidate', 'product_users.updated_at', 'information'])
+            ->where('isValidate', '=', 0)->orWhere('step', '=', 2)
+            ->get()->toArray();
+        }
+        else
+        {
+            $isValidate = 0;
+            if($orderBy === "2-1"){
+                $isValidate = 1;
+                $orderBy = 2;
+            }
+            $validate_list = DB::table('product_users')
+            ->join('users', 'product_users.user_id', '=', 'users.id')
+            ->join('products', 'product_users.product_id', '=', 'products.id')
+            ->select(['users.name as username', 'products.name as productname', 'product_users.id', 'products.img', 'step', 'product_users.isValidate', 'product_users.updated_at', 'information'])
+            ->where([['isValidate', '=', $isValidate], ['product_users.step', '=', $orderBy]])
+            ->orderByDesc('updated_at')
+            ->get()->toArray();
+        }
 
-        $validate_list = DB::table('product_users')
-        ->join('users', 'product_users.user_id', '=', 'users.id')
-        ->join('products', 'product_users.product_id', '=', 'products.id')
-        ->select(['users.name as username', 'products.name as productname', 'product_users.id', 'products.img', 'step', 'product_users.isValidate', 'product_users.updated_at', 'information'])
-        ->where('isValidate', '=', 0)->orWhere('step', '=', 2)->get()->toArray();
+      
         return view('admin.waiting_list')
         ->with('validate_list', $validate_list);
     }

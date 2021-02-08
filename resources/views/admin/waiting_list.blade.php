@@ -6,7 +6,17 @@
 
 
 @section('content')
-
+<h1>Trier de façon :</h1>
+<select name="forma" onchange="location = this.value;">
+  <option value="{{ route('waiting_list') }}" checked>Choisir une option</option>
+  <option value="{{ route('waiting_list') }}/ALL">Tous</option>
+  <option value="{{ route('waiting_list') }}/0" style="color:rgb(241, 105, 105);">Non Commandé</option>
+  <option value="{{ route('waiting_list') }}/1" style="color:rgb(255, 169, 31);" >Non reçu</option>
+  <option value="{{ route('waiting_list') }}/2" style="color:rgb(255, 169, 31);" >Confirmé le reçu</option>
+  <option value="{{ route('waiting_list') }}/2-1" style="color:rgb(137, 241, 105);">En attente de la demande de l'avis</option>
+  <option value="{{ route('waiting_list') }}/3" style="color:rgb(137, 241, 105);">Non noté</option>
+ </select>
+ 
 <table class="table">
     <thead>
       <tr>
@@ -33,7 +43,7 @@
             @break
           @case(2)
             @if ($validate->isValidate == 0)
-              <td class="card-subtitle mb-2" style="color:    rgb(137, 241, 105);">Confirmer la reçu</td>
+              <td class="card-subtitle mb-2" style="color:    rgb(137, 241, 105);">Confirmer le reçu</td>
             @else
               <td class="card-subtitle mb-2" style="color:    rgb(137, 241, 105);">En attente de la demande de l'avis</td>
             @endif

@@ -48,7 +48,7 @@ Route::group(['middleware' => ['admin']], function () {
         Route::get('/product/list', 'AdminController@products_list')->name('products_list');
         Route::get('/images/add', 'AdminController@image_add')->name('image_add');
         Route::get('/images/list', 'AdminController@images_list')->name('images_list');
-        Route::get('/manager/waiting', 'AdminController@waiting_list')->name('waiting_list');
+        Route::get('/manager/waiting/{orderBy?}', 'AdminController@waiting_list')->name('waiting_list');
         Route::get('/manager/product', 'AdminController@manager_product')->name('manager_product');
 
         Route::post('/product/add', 'AdminController@addProduct')->name('admin_product_add');
