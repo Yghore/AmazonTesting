@@ -59,6 +59,22 @@ class AdminController extends Controller
         ->with('img_list', $img_list);
     }
 
+    public function productEditView(int $id)
+    {
+        $product = DB::table('products')->where('id', '=', $id)->first();
+        $img_list = ImageController::arrayImages();
+        return view('admin.edit_product')
+        ->with(['img_list' => $img_list, 'product' => $product]);
+    }
+
+    public function productEdit(int $id, request $request)
+    {
+        $data = $request->all();
+        unset($data['_token']);
+        DB::table('products')->where('id', '=', $id)->update($data);
+        return redirect(route('admin'))->with(['success' => 'Modification effectuée avec succès']);
+    }
+
     public function products_list()
     {
         $products_list = DB::table('products')->where('isHidden', '=', 0)->get()->toArray();
@@ -138,7 +154,7 @@ class AdminController extends Controller
             'keywords' => 'required|string',
             'reference' => 'required|string|max:100',
             'desc_product' => 'required|string',
-            'img' => 'required|max:100',
+            'img' => 'max:100',
         ];
         $messages = 
         [
@@ -248,5 +264,7 @@ class AdminController extends Controller
         Mail::to($step->email)->send(new ErrorCommand());
         return redirect(route('waiting_list'))->with($with);
     }
+
+
 
 }

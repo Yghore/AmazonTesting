@@ -4,32 +4,33 @@
 @section('title', trans('product.app_name') . ' | ' . trans('product.title.header.product'))
     
 
+@push('head')
+    <style>
+      .card-text 
+      {
+        display: block;
+      }
+    </style>
+@endpush
+
 @section('content')
 
 
 @if (!empty($product))
-<h1>{{ trans('product.title.page.product', ['name' => $product->name]) }}</h1>
 
 
-<div class="container-fluid">
-  <div class="row my-3">
-     <div class="col-12 col-sm-6 my-3">
-       <div class="card">
-         <div class="position-relative">
-          <img class="card-img-top" src="{{ asset('storage/' . $product->img) }}" alt="Image du produit">
-         </div>
-         <div class="card-body">
-           <h5 class="card-title"><small>{{ $product->name }}</small></h5>
-           <p class="card-text"><small>{{ $product->price }} €</small></p>
-           <p class="card-text">Description du produit : {{ $product->desc_product }}</p>
-           <p class="card-text"><small>Mot clé : {{ $product->keywords }}</small></p>
-           <p class="card-text"><small>Référence : {{ $product->reference }}</small></p>
-         </div>
-       </div>
-    </div>
+
+<div style="text-align: center;">
+  <h1 style="border-bottom: 1px solid black;">{{ trans('product.title.page.product', ['name' => $product->name]) }}</h1>
+  <div style="display: block">
+    <img style="width: 500px; height: auto; border-bottom: 2px solid black; padding-bottom: 10px;" src="{{ asset('storage/' . $product->img) }}" alt="Image du produit">
+  
+    <p class="card-text"><strong> Prix : </strong><small>{{ $product->price }} €</small></p>
+    <p class="card-text"><strong>Description du produit : </strong>{{ $product->desc_product }}</p>
+    <p class="card-text"><strong><small>Mot clé : </strong>{{ $product->keywords }}</small></p>
+    <p class="card-text"><strong><small>Référence : </strong>{{ $product->reference }}</small></p>
   </div>
- </div>
-
+</div>
 
 @else
 

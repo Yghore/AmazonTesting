@@ -2,7 +2,7 @@
 
 
 @section('title', 'Amazon Testing | Administration')
-@section('dashboard_title', 'Dashboard - Product')
+@section('dashboard_title', 'Dashboard - Produit Manager')
 
 
 @section('content')

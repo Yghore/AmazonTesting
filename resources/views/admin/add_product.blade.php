@@ -3,7 +3,7 @@
 
 
 @section('title', 'Amazon Testing | Produits')
-@section('dashboard_title', 'Dashboard - Home')
+@section('dashboard_title', 'Dashboard - Ajouter un produit')
 
 
 @section('content')

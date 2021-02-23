@@ -2,7 +2,7 @@
 
 
 @section('title', 'Amazon Testing | Administration')
-@section('dashboard_title', 'Dashboard - Home')
+@section('dashboard_title', 'Dashboard - Liste des produits')
 
 
 @section('content')
@@ -25,7 +25,7 @@
           <td>{{ $product->name }}</td>
           <td><img style="width: 150px; max-height: auto;" src="{{ asset('storage/'. $product->img) }}" alt="{{ $product->img }}"></td>
           <td>{{ $product->desc_product }}</td>
-          <td><i class="fas fa-edit"></i> | <i class="fas fa-trash"></i></td>
+          <td><a href="{{ route('admin.product.edit', ['id' => $product->id]) }}"><i class="fas fa-edit"></i></a> | <i class="fas fa-trash"></i></td>
         </tr>
       @empty
           

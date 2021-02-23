@@ -2,7 +2,7 @@
 
 
 @section('title', 'Amazon Testing | Administration')
-@section('dashboard_title', 'Dashboard - Home')
+@section('dashboard_title', 'Dashboard - Ajouter une image')
 
 
 @section('content')
