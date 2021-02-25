@@ -253,7 +253,7 @@ class AdminController extends Controller
 
     public function errorStep(int $productuser)
     {
-        DB::table('product_users')->where('id', '=', $productuser)->update(['isValidate' => 1, 'step' => 4]);
+        DB::table('product_users')->where('id', '=', $productuser)->update(['isValidate' => 1, 'step' => 5]);
         $step = DB::table('product_users')->where('product_users.id', '=', $productuser)
         ->join('users', 'product_users.user_id', '=', 'users.id')
         ->select(['step', 'users.email'])->first();
@@ -268,3 +268,4 @@ class AdminController extends Controller
 
 
 }
+

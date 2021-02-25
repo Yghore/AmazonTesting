@@ -87,7 +87,7 @@ class RegisterController extends Controller
         $data = $request->all();
         $validate = $this->validator($data);
         $user = $this->create($data);
-        Mail::to($request->input('email'))->send(new NewRegister());
+        Mail::to($request->input('email'))->send(new NewRegister($data['name']));
         return redirect(route('users_list'))->with(['success' => 'Vous avez bien crée l\'utilisateur']);
     }
 

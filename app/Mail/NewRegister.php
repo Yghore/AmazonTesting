@@ -11,13 +11,17 @@ class NewRegister extends Mailable
 {
     use Queueable, SerializesModels;
 
+
+    public $user;
+
     /**
      * Create a new message instance
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(String $user)
     {
+        $this->user = $user;
         $this->subject('Bienvenue sur AmazonTesting !');
     }
 

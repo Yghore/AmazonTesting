@@ -108,7 +108,7 @@
                                                                                                 Vos identifiants de connexion :
                                                                                             <br>
                                                                                             <br>
-                                                                                                Utilisateur:
+                                                                                                Utilisateur: {{ $user }}
                                                                                             <br>
                                                                                                 Mot de passe: amazon
                                                                                             <span class="colour" style="color:rgb(255, 0, 0)">
