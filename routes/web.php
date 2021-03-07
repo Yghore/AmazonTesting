@@ -42,6 +42,7 @@ Route::group(['middleware' => ['admin']], function () {
 
         Route::get('/', 'AdminController@index')->name('admin');
         Route::get('/user/list', 'AdminController@users_list')->name('users_list');
+        Route::get('/user/remove/{id}', 'RegisterController@deleteUser')->name('user_delete');
         Route::get('/user/add', 'AdminController@user_add')->name('user_add');
         Route::get('/user/product/add', 'AdminController@user_add_product')->name('user_add_product');
         Route::get('/product/add', 'AdminController@product_add')->name('product_add');
@@ -52,7 +53,6 @@ Route::group(['middleware' => ['admin']], function () {
         Route::get('/images/list', 'AdminController@images_list')->name('images_list');
         Route::get('/manager/waiting/{orderBy?}', 'AdminController@waiting_list')->name('waiting_list');
         Route::get('/manager/product', 'AdminController@manager_product')->name('manager_product');
-
         Route::post('/product/add', 'AdminController@addProduct')->name('admin_product_add');
         Route::post('/user/add/product', 'AdminController@addProductForUser')->name('admin_add_product_user');
         Route::get('/step/validate/{productuser}', 'AdminController@validateStep')->name('admin_validate_step');

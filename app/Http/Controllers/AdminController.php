@@ -213,7 +213,7 @@ class AdminController extends Controller
         Mail::to($user->email)->send(new NewCommands());
         $with = [
             'success' => 'Le produit à bien été ajouté pour l\'utilisateur !',
-        ];
+        ];                              
         return redirect(route('waiting_list'))->with($with);
         
     }

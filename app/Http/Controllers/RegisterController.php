@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Mail\NewRegister;
 use App\Models\User;
+use App\Mail\NewRegister;
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -89,6 +91,22 @@ class RegisterController extends Controller
         $user = $this->create($data);
         Mail::to($request->input('email'))->send(new NewRegister($data['name']));
         return redirect(route('users_list'))->with(['success' => 'Vous avez bien crée l\'utilisateur']);
+    }
+
+
+
+    public function deleteUser(int $id)
+    {
+        $userExist = DB::table('users')->where('id', '=', $id)->first();
+        if(!empty($userExist))
+        {
+            DB::table('users')->where('id', '=', $id)->delete();
+            $with = [
+                'success' => 'L\'utilisateur à été supprimé !',
+            ];                              
+            return redirect(route('users_list'))->with($with);
+        }
+        return redirect(route('users_list'))->withErrors('L\'utilisateur n\'existe pas !');
     }
 
 }

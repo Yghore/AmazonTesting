@@ -25,7 +25,7 @@
           <td>{{ $user->name }}</td>
           <td>{{ $user->email }}</td>
           <td>{{ $user->created_at}}</td>
-          <td><i class="fas fa-edit"></i> | <i class="fas fa-trash"></i></td>
+          <td><i class="fas fa-edit"></i> | <a href="{{ route('user_delete', $user->id)  }}"><i class="fas fa-trash"></i></a></td>
         </tr>
       @empty
       <tr>
